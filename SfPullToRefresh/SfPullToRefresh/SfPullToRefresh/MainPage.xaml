@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SfPullToRefresh"
+             x:Class="SfPullToRefresh.MainPage"
+             xmlns:dataGrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms" 
+             xmlns:pullToRefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms">
+
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepository x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <pullToRefresh:SfPullToRefresh x:Name="pullToRefresh"
+                                       RefreshContentHeight="50"
+                                       RefreshContentThreshold="40"
+                                       PullingThreshold="150"                                          
+                                       RefreshContentWidth="50"
+                                       ProgressStrokeWidth="8"
+                                       TransitionMode="SlideOnTop"
+                                       IsRefreshing="False">
+            <pullToRefresh:SfPullToRefresh.PullableContent>
+                <dataGrid:SfDataGrid x:Name="dataGrid" 
+                                     AutoGenerateColumns="False"
+                                     ItemsSource="{Binding OrderInfoCollection}"
+                                     ColumnSizer="Star">
+                    <dataGrid:SfDataGrid.Columns>
+                        <dataGrid:GridTextColumn MappingName="OrderID" HeaderText="Order ID"/>
+                        <dataGrid:GridTextColumn MappingName="CustomerID" HeaderText="Customer ID"/>
+                        <dataGrid:GridTextColumn MappingName="Customer" HeaderText="Name"/>
+                        <dataGrid:GridTextColumn MappingName="ShipCity" HeaderText="City"/>
+                        <dataGrid:GridTextColumn MappingName="ShipCountry" HeaderText="Country"/>
+                    </dataGrid:SfDataGrid.Columns>
+                </dataGrid:SfDataGrid>
+            </pullToRefresh:SfPullToRefresh.PullableContent>
+        </pullToRefresh:SfPullToRefresh>
+    </ContentPage.Content>
+</ContentPage>
